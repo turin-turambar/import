@@ -14,3 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('tempImport/{id}', function($id){
+	$product = App\Table::find($id);
+	echo $product->name . ' ' . $product->brand;
+});
+
+Route::get('products', function(){
+	$products = App\Table::all();
+
+	$data = array(
+		'products' => $products
+		);
+
+	return view('temp', $data);
+	//return View::make('temp');
+});
+
+Route::get('import', 'ImportController@index');
